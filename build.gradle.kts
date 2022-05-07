@@ -15,13 +15,22 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    kotlin.sourceSets["main"].kotlin.srcDir("${buildDir.path}/generated/src/main/kotlin")
+}
 
 dependencies {
+
     implementation("org.springframework.boot:spring-boot-starter-web") {
         exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
     }
     implementation("org.springframework.boot:spring-boot-starter-jetty")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
+
+    runtimeOnly("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
+    runtimeOnly("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
+    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
